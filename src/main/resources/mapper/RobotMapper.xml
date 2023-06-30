@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ros.mapper.RobotMapper">
+
+    <resultMap id="BaseResultMap" type="com.ros.domain.Robot">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="robotName" column="robot_name" jdbcType="VARCHAR"/>
+            <result property="robotLocation" column="robot_location" jdbcType="VARCHAR"/>
+            <result property="robotState" column="robot_state" jdbcType="VARCHAR"/>
+            <result property="robotOrder" column="robot_order" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,robot_name,robot_location,
+        robot_state,robot_order
+    </sql>
+</mapper>
