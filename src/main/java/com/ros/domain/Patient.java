@@ -27,10 +27,10 @@ public class Patient implements Serializable {
     private String patientName;
 
     /**
-     * 病人电话
+     * 病人病情
      */
-    @TableField(value = "patient_phone")
-    private String patientPhone;
+    @TableField(value = "patient_condition")
+    private String patientCondition;
 
     /**
      * 病人地址
@@ -55,7 +55,7 @@ public class Patient implements Serializable {
         Patient other = (Patient) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getPatientName() == null ? other.getPatientName() == null : this.getPatientName().equals(other.getPatientName()))
-            && (this.getPatientPhone() == null ? other.getPatientPhone() == null : this.getPatientPhone().equals(other.getPatientPhone()))
+            && (this.getPatientCondition() == null ? other.getPatientCondition() == null : this.getPatientCondition().equals(other.getPatientCondition()))
             && (this.getPatientAddress() == null ? other.getPatientAddress() == null : this.getPatientAddress().equals(other.getPatientAddress()));
     }
 
@@ -65,7 +65,7 @@ public class Patient implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getPatientName() == null) ? 0 : getPatientName().hashCode());
-        result = prime * result + ((getPatientPhone() == null) ? 0 : getPatientPhone().hashCode());
+        result = prime * result + ((getPatientCondition() == null) ? 0 : getPatientCondition().hashCode());
         result = prime * result + ((getPatientAddress() == null) ? 0 : getPatientAddress().hashCode());
         return result;
     }
@@ -78,7 +78,7 @@ public class Patient implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", patientName=").append(patientName);
-        sb.append(", patientPhone=").append(patientPhone);
+        sb.append(", patientCondition=").append(patientCondition);
         sb.append(", patientAddress=").append(patientAddress);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

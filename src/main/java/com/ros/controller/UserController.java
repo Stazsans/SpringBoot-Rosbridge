@@ -1,5 +1,6 @@
 package com.ros.controller;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.ros.DTO.LoginDTO;
@@ -11,10 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.AccountException;
 import javax.security.auth.login.FailedLoginException;
@@ -29,7 +27,7 @@ public class UserController {
     private UserService userService;
 
     @Operation(summary = "登录请求")
-    @PostMapping("/Login")
+    @PostMapping("/login")
     public Result<JSONObject> Login(@RequestBody LoginDTO loginDTO) {
         User user = new User();
         try {
@@ -47,6 +45,32 @@ public class UserController {
         map.put("UserRole",user.getUserRole());
         JSONObject jsonObject = new JSONObject(map);
         return ResultUtil.success(jsonObject);
+    }
+
+    @Operation(summary = "注销登录")
+    @GetMapping("/logout")
+    public <T> Result<T> Logout() {
+        try {
+            StpUtil.checkLogin();
+        } catch (NotLoginException e) {
+            return ResultUtil.defineFail(403,"未登录");
+        } catch (Exception e) {
+            return ResultUtil.defineFail(500,"服务器内部错误");
+        }
+        StpUtil.logout();
+        return ResultUtil.success("注销登录成功");
+    }
+
+    @Operation(summary = "注册请求")
+    @GetMapping("/register")
+    public <T> Result<T> Register() {
+        try {
+            StpUtil.checkLogin();
+        } catch (NotLoginException e) {
+            return ResultUtil.defineFail(500,"服务器内部错误");
+        }
+        StpUtil.logout();
+        return ResultUtil.success("注销登录成功");
     }
 
 

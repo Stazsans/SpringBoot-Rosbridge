@@ -23,6 +23,11 @@ public enum ResultEnum {
     IncorrectPassword(402),
 
     /**
+     * 未登录
+     */
+    NotLogin(403),
+
+    /**
      * 接口不存在
      */
     NOT_FOUND(404),

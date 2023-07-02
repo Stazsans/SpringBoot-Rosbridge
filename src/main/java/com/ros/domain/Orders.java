@@ -31,7 +31,7 @@ public class Orders implements Serializable {
      * 
      */
     @TableField(value = "order_state")
-    private String orderState;
+    private Integer orderState;
 
     /**
      * 创建人
@@ -50,18 +50,6 @@ public class Orders implements Serializable {
      */
     @TableField(value = "box_id")
     private Integer boxId;
-
-    /**
-     * 药品名字
-     */
-    @TableField(value = "drug_name")
-    private String drugName;
-
-    /**
-     * 药品数量
-     */
-    @TableField(value = "order_drug_number")
-    private Integer orderDrugNumber;
 
     /**
      * 配送地址
@@ -90,8 +78,6 @@ public class Orders implements Serializable {
             && (this.getCreateBy() == null ? other.getCreateBy() == null : this.getCreateBy().equals(other.getCreateBy()))
             && (this.getPatientName() == null ? other.getPatientName() == null : this.getPatientName().equals(other.getPatientName()))
             && (this.getBoxId() == null ? other.getBoxId() == null : this.getBoxId().equals(other.getBoxId()))
-            && (this.getDrugName() == null ? other.getDrugName() == null : this.getDrugName().equals(other.getDrugName()))
-            && (this.getOrderDrugNumber() == null ? other.getOrderDrugNumber() == null : this.getOrderDrugNumber().equals(other.getOrderDrugNumber()))
             && (this.getOrderAddress() == null ? other.getOrderAddress() == null : this.getOrderAddress().equals(other.getOrderAddress()));
     }
 
@@ -105,8 +91,6 @@ public class Orders implements Serializable {
         result = prime * result + ((getCreateBy() == null) ? 0 : getCreateBy().hashCode());
         result = prime * result + ((getPatientName() == null) ? 0 : getPatientName().hashCode());
         result = prime * result + ((getBoxId() == null) ? 0 : getBoxId().hashCode());
-        result = prime * result + ((getDrugName() == null) ? 0 : getDrugName().hashCode());
-        result = prime * result + ((getOrderDrugNumber() == null) ? 0 : getOrderDrugNumber().hashCode());
         result = prime * result + ((getOrderAddress() == null) ? 0 : getOrderAddress().hashCode());
         return result;
     }
@@ -123,8 +107,6 @@ public class Orders implements Serializable {
         sb.append(", createBy=").append(createBy);
         sb.append(", patientName=").append(patientName);
         sb.append(", boxId=").append(boxId);
-        sb.append(", drugName=").append(drugName);
-        sb.append(", orderDrugNumber=").append(orderDrugNumber);
         sb.append(", orderAddress=").append(orderAddress);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

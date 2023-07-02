@@ -13,6 +13,12 @@ public class ResultUtil {
         return result;
     }
 
+    public static <T> Result<T> success(String msg) {
+        Result<T> result = new Result<>();
+        result.setCode(ResultEnum.SUCCESS).setMsg(msg);
+        return result;
+    }
+
     public static <T> Result<T> fail(String msg) {
         Result<T> result = new Result<>();
         result.setCode(ResultEnum.FAIL).setMsg(msg);

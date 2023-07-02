@@ -7,12 +7,12 @@
     <resultMap id="BaseResultMap" type="com.ros.domain.Patient">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="patientName" column="patient_name" jdbcType="VARCHAR"/>
-            <result property="patientPhone" column="patient_phone" jdbcType="VARCHAR"/>
+            <result property="patientCondition" column="patient_condition" jdbcType="VARCHAR"/>
             <result property="patientAddress" column="patient_address" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,patient_name,patient_phone,
+        id,patient_name,patient_condition,
         patient_address
     </sql>
 </mapper>

@@ -7,18 +7,16 @@
     <resultMap id="BaseResultMap" type="com.ros.domain.Orders">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="orderState" column="order_state" jdbcType="VARCHAR"/>
+            <result property="orderState" column="order_state" jdbcType="TINYINT"/>
             <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
             <result property="patientName" column="patient_name" jdbcType="VARCHAR"/>
             <result property="boxId" column="box_id" jdbcType="INTEGER"/>
-            <result property="drugName" column="drug_name" jdbcType="VARCHAR"/>
-            <result property="orderDrugNumber" column="order_drug_number" jdbcType="INTEGER"/>
             <result property="orderAddress" column="order_address" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,create_time,order_state,
         create_by,patient_name,box_id,
-        drug_name,order_drug_number,order_address
+        order_address
     </sql>
 </mapper>
