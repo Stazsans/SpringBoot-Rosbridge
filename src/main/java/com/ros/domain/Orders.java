@@ -42,8 +42,8 @@ public class Orders implements Serializable {
     /**
      * 病人
      */
-    @TableField(value = "patient_name")
-    private String patientName;
+    @TableField(value = "patient_Id")
+    private Integer patientId;
 
     /**
      * 药箱号
@@ -76,7 +76,7 @@ public class Orders implements Serializable {
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getOrderState() == null ? other.getOrderState() == null : this.getOrderState().equals(other.getOrderState()))
             && (this.getCreateBy() == null ? other.getCreateBy() == null : this.getCreateBy().equals(other.getCreateBy()))
-            && (this.getPatientName() == null ? other.getPatientName() == null : this.getPatientName().equals(other.getPatientName()))
+            && (this.getPatientId() == null ? other.getPatientId() == null : this.getPatientId().equals(other.getPatientId()))
             && (this.getBoxId() == null ? other.getBoxId() == null : this.getBoxId().equals(other.getBoxId()))
             && (this.getOrderAddress() == null ? other.getOrderAddress() == null : this.getOrderAddress().equals(other.getOrderAddress()));
     }
@@ -89,7 +89,7 @@ public class Orders implements Serializable {
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getOrderState() == null) ? 0 : getOrderState().hashCode());
         result = prime * result + ((getCreateBy() == null) ? 0 : getCreateBy().hashCode());
-        result = prime * result + ((getPatientName() == null) ? 0 : getPatientName().hashCode());
+        result = prime * result + ((getPatientId() == null) ? 0 : getPatientId().hashCode());
         result = prime * result + ((getBoxId() == null) ? 0 : getBoxId().hashCode());
         result = prime * result + ((getOrderAddress() == null) ? 0 : getOrderAddress().hashCode());
         return result;
@@ -105,7 +105,7 @@ public class Orders implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", orderState=").append(orderState);
         sb.append(", createBy=").append(createBy);
-        sb.append(", patientName=").append(patientName);
+        sb.append(", patientId=").append(patientId);
         sb.append(", boxId=").append(boxId);
         sb.append(", orderAddress=").append(orderAddress);
         sb.append(", serialVersionUID=").append(serialVersionUID);

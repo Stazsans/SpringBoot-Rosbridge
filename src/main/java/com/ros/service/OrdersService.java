@@ -1,5 +1,6 @@
 package com.ros.service;
 
+import com.ros.DTO.OrderDTO;
 import com.ros.domain.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OrdersService extends IService<Orders> {
 
+    void orderAdd(OrderDTO orderDTO);
+
+    void orderDelById(Integer id);
 }

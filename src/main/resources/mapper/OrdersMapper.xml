@@ -9,14 +9,14 @@
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="orderState" column="order_state" jdbcType="TINYINT"/>
             <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-            <result property="patientName" column="patient_name" jdbcType="VARCHAR"/>
+            <result property="patientId" column="patient_Id" jdbcType="INTEGER"/>
             <result property="boxId" column="box_id" jdbcType="INTEGER"/>
             <result property="orderAddress" column="order_address" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,create_time,order_state,
-        create_by,patient_name,box_id,
+        create_by,patient_Id,box_id,
         order_address
     </sql>
 </mapper>
