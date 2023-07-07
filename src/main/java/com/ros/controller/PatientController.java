@@ -10,10 +10,7 @@ import com.ros.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,6 +41,17 @@ public class PatientController {
             return ResultUtil.pageSuccess(patientService.page(patientPage,patientQueryWrapper));
         } catch (Exception e) {
             return ResultUtil.defineFail(500,"服务器内部错误");
+        }
+    }
+
+    @GetMapping("/patientQueryById/{patientId}")
+    @Operation(summary = "根据病人id查询信息")
+    public Result<Patient> patientQueryById(@PathVariable Integer patientId) {
+        try {
+            Patient patient = patientService.getById(patientId);
+            return ResultUtil.success(patient);
+        } catch (Exception e){
+            return ResultUtil.defineFail(500,"服务器错误");
         }
     }
 }
