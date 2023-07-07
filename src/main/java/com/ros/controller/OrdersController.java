@@ -48,7 +48,7 @@ public class OrdersController {
      */
     @PostMapping("/orderAdd")
     @Operation(summary = "新增药单")
-    public <T> Result<T> orderAdd(OrderDTO orderDTO) {
+    public <T> Result<T> orderAdd(@RequestBody OrderDTO orderDTO) {
         try {
             ordersService.orderAdd(orderDTO);
             return ResultUtil.success("创建成功");
@@ -61,9 +61,9 @@ public class OrdersController {
     /**
      * 删除一个药单信息
      */
-    @DeleteMapping("/orderDelById")
+    @DeleteMapping("/orderDelById/{id}")
     @Operation(summary = "根据id删除药单")
-    public Result<?> orderDelById(Integer id) {
+    public Result<?> orderDelById(@PathVariable Integer id) {
         try{
             ordersService.orderDelById(id);
             return ResultUtil.success("删除成功");

@@ -11,6 +11,7 @@ import com.ros.service.OrderDrugService;
 import com.ros.service.OrdersService;
 import com.ros.service.PatientService;
 import com.ros.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import java.util.Map;
 * @createDate 2023-07-02 15:59:40
 */
 @Service
+@Slf4j
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     implements OrdersService{
     @Autowired
@@ -46,7 +48,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         Date dateTime = new Date();
         orders.setCreateTime(dateTime);
         orders.setOrderState(0);
-        Integer loginId = (Integer) StpUtil.getLoginId();
+        Integer loginId = Integer.valueOf(StpUtil.getLoginId().toString());
         orders.setCreateBy(userMapper.selectById(loginId).getUserName());
         orders.setPatientId(orderDTO.getPatientId());
         orders.setOrderAddress(patientMapper.selectById(orderDTO.getPatientId()).getPatientAddress());
