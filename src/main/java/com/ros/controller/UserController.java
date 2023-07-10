@@ -69,12 +69,14 @@ public class UserController {
 
     @Operation(summary = "获取用户角色")
     @GetMapping("/getUserRole")
-    public Result<Object> getUserRole() {
+    public Result<String> getUserRole() {
         try {
-            Integer loginId = (Integer) StpUtil.getLoginId();
+            log.info(StpUtil.getTokenValue());
+            Integer loginId = Integer.valueOf(StpUtil.getLoginId().toString());
             User user = userService.getById(loginId);
-            return ResultUtil.success((Object)user.getUserRole());
+            return ResultUtil.success(user.getUserRole());
         } catch (Exception e) {
+            log.error(e.toString());
             return ResultUtil.defineFail(405,"未登录");
         }
     }
