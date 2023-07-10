@@ -49,6 +49,7 @@ public class UserController {
         } catch (NotLoginException e) {
             return ResultUtil.defineFail(403,"未登录");
         } catch (Exception e) {
+            log.error(e.toString());
             return ResultUtil.defineFail(500,"服务器内部错误");
         }
         StpUtil.logout();
@@ -61,6 +62,7 @@ public class UserController {
         try {
             StpUtil.checkLogin();
         } catch (NotLoginException e) {
+            log.error(e.toString());
             return ResultUtil.defineFail(500,"服务器内部错误");
         }
         StpUtil.logout();
@@ -71,7 +73,6 @@ public class UserController {
     @GetMapping("/getUserRole")
     public Result<String> getUserRole() {
         try {
-            log.info(StpUtil.getTokenValue());
             Integer loginId = Integer.valueOf(StpUtil.getLoginId().toString());
             User user = userService.getById(loginId);
             return ResultUtil.success(user.getUserRole());

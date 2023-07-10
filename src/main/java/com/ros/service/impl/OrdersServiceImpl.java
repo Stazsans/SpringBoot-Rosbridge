@@ -7,11 +7,7 @@ import com.ros.DTO.OrderDTO;
 import com.ros.domain.OrderDrug;
 import com.ros.domain.Orders;
 import com.ros.mapper.*;
-import com.ros.service.OrderDrugService;
 import com.ros.service.OrdersService;
-import com.ros.service.PatientService;
-import com.ros.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +20,6 @@ import java.util.Map;
 * @createDate 2023-07-02 15:59:40
 */
 @Service
-@Slf4j
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     implements OrdersService{
     @Autowired

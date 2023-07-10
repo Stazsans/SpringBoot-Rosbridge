@@ -9,6 +9,7 @@ import com.ros.result.ResultUtil;
 import com.ros.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/patient")
 @Tag(name ="病人模块相关接口")
+@Slf4j
 public class PatientController {
     @Autowired
     private PatientService patientService;
@@ -28,6 +30,7 @@ public class PatientController {
             List<Patient> patientList = patientService.list();
             return ResultUtil.success(patientList);
         } catch (Exception e) {
+            log.error(e.toString());
             return ResultUtil.defineFail(500,"服务器内部错误");
         }
     }
@@ -40,6 +43,7 @@ public class PatientController {
             Page<Patient> patientPage = new Page<>(pageNum,pageSize,false);
             return ResultUtil.pageSuccess(patientService.page(patientPage,patientQueryWrapper));
         } catch (Exception e) {
+            log.error(e.toString());
             return ResultUtil.defineFail(500,"服务器内部错误");
         }
     }
@@ -51,6 +55,7 @@ public class PatientController {
             Patient patient = patientService.getById(patientId);
             return ResultUtil.success(patient);
         } catch (Exception e){
+            log.error(e.toString());
             return ResultUtil.defineFail(500,"服务器错误");
         }
     }

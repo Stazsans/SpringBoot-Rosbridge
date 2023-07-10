@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ros.result.ResultUtil;
 
-import java.util.Date;
-
 @RestController
 @RequestMapping("/orders")
 @Tag(name = "药单模块相关接口")
@@ -39,6 +37,7 @@ public class OrdersController {
             Page<Orders> ordersPage = new Page<>(pageNum, pageSize, false);
             return ResultUtil.pageSuccess(ordersService.page(ordersPage, ordersQueryWrapper));
         } catch (Exception e) {
+            log.error(e.toString());
             return ResultUtil.defineFail(500, "服务器内部错误");
         }
     }
