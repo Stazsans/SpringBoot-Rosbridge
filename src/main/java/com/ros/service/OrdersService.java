@@ -1,8 +1,12 @@
 package com.ros.service;
 
 import com.ros.DTO.OrderDTO;
+import com.ros.domain.OrderDrug;
 import com.ros.domain.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ros.result.Result;
+
+import java.util.List;
 
 /**
 * @author ss
@@ -14,4 +18,7 @@ public interface OrdersService extends IService<Orders> {
     void orderAdd(OrderDTO orderDTO);
 
     void orderDelById(Integer id);
+
+    List<OrderDrug> queryOrderDrugById(Integer id);
+
 }

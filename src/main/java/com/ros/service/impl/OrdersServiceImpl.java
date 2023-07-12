@@ -7,11 +7,13 @@ import com.ros.DTO.OrderDTO;
 import com.ros.domain.OrderDrug;
 import com.ros.domain.Orders;
 import com.ros.mapper.*;
+import com.ros.result.Result;
 import com.ros.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,7 +51,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         orders.setOrderAddress(patientMapper.selectById(orderDTO.getPatientId()).getPatientAddress());
         //TODO 调度药箱
         orders.setBoxId(1);
-        int orderId = ordersMapper.insert(orders);
+        Integer orderId = ordersMapper.insert(orders);
         for(Map.Entry<Integer, Integer> entry: orderDTO.getOrderDrug().entrySet()) {
             OrderDrug orderDrug = new OrderDrug();
             orderDrug.setOrderId(orderId);
@@ -66,6 +68,13 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         QueryWrapper<OrderDrug> orderDrugQueryWrapper = new QueryWrapper<>();
         orderDrugQueryWrapper.eq("order_id",id);
         orderDrugMapper.delete(orderDrugQueryWrapper);
+    }
+
+    @Override
+    public List<OrderDrug> queryOrderDrugById(Integer id) {
+        QueryWrapper<OrderDrug> orderDrugQueryWrapper = new QueryWrapper<>();
+        orderDrugQueryWrapper.eq("order_id",id);
+        return orderDrugMapper.selectList(orderDrugQueryWrapper);
     }
 }
 

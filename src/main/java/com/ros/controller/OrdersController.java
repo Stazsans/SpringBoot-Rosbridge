@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ros.DTO.OrderDTO;
 import com.ros.VO.PageInfo;
+import com.ros.domain.OrderDrug;
 import com.ros.domain.Orders;
 import com.ros.result.Result;
 import com.ros.service.OrdersService;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.ros.result.ResultUtil;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -36,6 +39,20 @@ public class OrdersController {
             }
             Page<Orders> ordersPage = new Page<>(pageNum, pageSize, false);
             return ResultUtil.pageSuccess(ordersService.page(ordersPage, ordersQueryWrapper));
+        } catch (Exception e) {
+            log.error(e.toString());
+            return ResultUtil.defineFail(500, "服务器内部错误");
+        }
+    }
+
+    /**
+     * 根据药单id查询药品及药品数量
+     */
+    @GetMapping("queryOrderDrugById/{id}")
+    @Operation(summary = "根据药单查询药品名及数量")
+    public Result<List<OrderDrug>> queryOrderDrugById(@PathVariable Integer id) {
+        try {
+            return ResultUtil.success(ordersService.queryOrderDrugById(id));
         } catch (Exception e) {
             log.error(e.toString());
             return ResultUtil.defineFail(500, "服务器内部错误");
