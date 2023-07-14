@@ -8,6 +8,6 @@ import java.util.Map;
 @Data
 public class OrderDTO {
     private Integer patientId;
-    private Map<Integer, Integer> orderDrug;
+    private Map<Long, Integer> orderDrug;
 
 }

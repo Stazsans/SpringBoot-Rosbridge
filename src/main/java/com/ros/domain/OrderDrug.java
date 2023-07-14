@@ -30,7 +30,7 @@ public class OrderDrug implements Serializable {
      * 
      */
     @TableField(value = "drug_id")
-    private Integer drugId;
+    private Long drugId;
 
     /**
      * 

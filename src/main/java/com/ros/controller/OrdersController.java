@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ros.result.ResultUtil;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orders")
@@ -50,7 +51,7 @@ public class OrdersController {
      */
     @GetMapping("queryOrderDrugById/{id}")
     @Operation(summary = "根据药单查询药品名及数量")
-    public Result<List<OrderDrug>> queryOrderDrugById(@PathVariable Integer id) {
+    public Result<List<OrderDrug>> queryOrderDrugById(@PathVariable Long id) {
         try {
             return ResultUtil.success(ordersService.queryOrderDrugById(id));
         } catch (Exception e) {
@@ -79,7 +80,7 @@ public class OrdersController {
      */
     @DeleteMapping("/orderDelById/{id}")
     @Operation(summary = "根据id删除药单")
-    public Result<?> orderDelById(@PathVariable Integer id) {
+    public Result<?> orderDelById(@PathVariable Long id) {
         try{
             ordersService.orderDelById(id);
             return ResultUtil.success("删除成功");
@@ -89,9 +90,15 @@ public class OrdersController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/orderUpdate/{orderId}")
     @Operation(summary = "修改药单")
-    public Result<?> orderUpdate() {
-        return null;
+    public Result<?> orderUpdate(@PathVariable Long orderId, @RequestBody Map<Long,Integer> orderDrug) {
+        try{
+            ordersService.orderUpdate(orderId,orderDrug);
+            return ResultUtil.success("修改成功");
+        } catch (Exception e) {
+            log.error(e.toString());
+            return ResultUtil.fail(e.toString());
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ros.result.Result;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author ss
@@ -17,8 +18,9 @@ public interface OrdersService extends IService<Orders> {
 
     void orderAdd(OrderDTO orderDTO);
 
-    void orderDelById(Integer id);
+    void orderDelById(Long id);
 
-    List<OrderDrug> queryOrderDrugById(Integer id);
+    List<OrderDrug> queryOrderDrugById(Long id);
 
+    void orderUpdate(Long orderId, Map<Long, Integer> orderDrug);
 }
