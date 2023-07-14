@@ -9,6 +9,7 @@ import com.ros.domain.Orders;
 import com.ros.mapper.*;
 import com.ros.result.Result;
 import com.ros.service.OrdersService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 * @createDate 2023-07-02 15:59:40
 */
 @Service
+@Slf4j
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     implements OrdersService{
     @Autowired
@@ -51,7 +53,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         orders.setOrderAddress(patientMapper.selectById(orderDTO.getPatientId()).getPatientAddress());
         //TODO 调度药箱
         orders.setBoxId(1);
-        Integer orderId = ordersMapper.insert(orders);
+        ordersMapper.insert(orders);
+        Long orderId = orders.getId();
+        log.info(orderId.toString());
         for(Map.Entry<Integer, Integer> entry: orderDTO.getOrderDrug().entrySet()) {
             OrderDrug orderDrug = new OrderDrug();
             orderDrug.setOrderId(orderId);
