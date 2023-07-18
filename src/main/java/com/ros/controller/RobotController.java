@@ -15,6 +15,7 @@ public class RobotController {
     @Operation(summary = "获取小车信息")
     public Result<RobotState> getRobotState() {
         RobotState robotState = new RobotState();
+        robotState.setConnectionStatus(Boolean.TRUE);
         robotState.setVoltage("85");
         robotState.setSpeed("1");
         return ResultUtil.success(robotState);

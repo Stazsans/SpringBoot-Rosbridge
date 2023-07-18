@@ -8,6 +8,7 @@ import com.ros.domain.OrderDrug;
 import com.ros.domain.Orders;
 import com.ros.result.Result;
 import com.ros.service.OrdersService;
+import com.ros.sseEmitter.SseEmitterServer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -68,10 +69,11 @@ public class OrdersController {
     public <T> Result<T> orderAdd(@RequestBody OrderDTO orderDTO) {
         try {
             ordersService.orderAdd(orderDTO);
+            SseEmitterServer.sendMessage("admin", "有新的药单信息，请注意查收");
             return ResultUtil.success("创建成功");
         } catch (Exception e) {
             log.error(e.toString());
-            return ResultUtil.defineFail(500,"服务器内部错误");
+            return ResultUtil.defineFail(500, "服务器内部错误");
         }
     }
 
@@ -81,7 +83,7 @@ public class OrdersController {
     @DeleteMapping("/orderDelById/{id}")
     @Operation(summary = "根据id删除药单")
     public Result<?> orderDelById(@PathVariable Long id) {
-        try{
+        try {
             ordersService.orderDelById(id);
             return ResultUtil.success("删除成功");
         } catch (Exception e) {
@@ -95,9 +97,9 @@ public class OrdersController {
      */
     @PutMapping("/orderUpdate/{orderId}")
     @Operation(summary = "修改药单")
-    public Result<?> orderUpdate(@PathVariable Long orderId, @RequestBody Map<Long,Integer> orderDrug) {
-        try{
-            ordersService.orderUpdate(orderId,orderDrug);
+    public Result<?> orderUpdate(@PathVariable Long orderId, @RequestBody Map<Long, Integer> orderDrug) {
+        try {
+            ordersService.orderUpdate(orderId, orderDrug);
             return ResultUtil.success("修改成功");
         } catch (Exception e) {
             log.error(e.toString());
@@ -111,11 +113,30 @@ public class OrdersController {
     @GetMapping("/completeAssembly/{orderId}")
     @Operation(summary = "完成药物装配接口")
     public Result<?> completeAssembly(@PathVariable Long orderId) {
-        try{
+        try {
             Orders order = new Orders();
             order.setOrderState(1);
             order.setId(orderId);
             ordersService.updateById(order);
+            return ResultUtil.success("状态更新成功");
+        } catch (Exception e) {
+            log.error(e.toString());
+            return ResultUtil.fail(e.toString());
+        }
+    }
+
+    /**
+     * 完成药物配送
+     */
+    @GetMapping("/completeDelivery/{orderId}")
+    @Operation(summary = "完成药物配送")
+    public Result<?> completeDelivery(@PathVariable Long orderId) {
+        try {
+            Orders order = new Orders();
+            order.setOrderState(2);
+            order.setId(orderId);
+            ordersService.updateById(order);
+            SseEmitterServer.batchSendMessage("药单号为" + orderId.toString() + "的药单配送成功");
             return ResultUtil.success("状态更新成功");
         } catch (Exception e) {
             log.error(e.toString());
