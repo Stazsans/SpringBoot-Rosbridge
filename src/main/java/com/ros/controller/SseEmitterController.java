@@ -1,5 +1,6 @@
-package com.ros.sseEmitter;
+package com.ros.controller;
 
+import com.ros.sseEmitter.SseEmitterServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
