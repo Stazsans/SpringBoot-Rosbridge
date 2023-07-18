@@ -90,12 +90,33 @@ public class OrdersController {
         }
     }
 
+    /**
+     * 修改药单
+     */
     @PutMapping("/orderUpdate/{orderId}")
     @Operation(summary = "修改药单")
     public Result<?> orderUpdate(@PathVariable Long orderId, @RequestBody Map<Long,Integer> orderDrug) {
         try{
             ordersService.orderUpdate(orderId,orderDrug);
             return ResultUtil.success("修改成功");
+        } catch (Exception e) {
+            log.error(e.toString());
+            return ResultUtil.fail(e.toString());
+        }
+    }
+
+    /**
+     * 完成药物装配
+     */
+    @GetMapping("/completeAssembly/{orderId}")
+    @Operation(summary = "完成药物装配接口")
+    public Result<?> completeAssembly(@PathVariable Long orderId) {
+        try{
+            Orders order = new Orders();
+            order.setOrderState(1);
+            order.setId(orderId);
+            ordersService.updateById(order);
+            return ResultUtil.success("状态更新成功");
         } catch (Exception e) {
             log.error(e.toString());
             return ResultUtil.fail(e.toString());
