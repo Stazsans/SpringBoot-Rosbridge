@@ -39,8 +39,9 @@ public class OrdersController {
             if (orderState != -1) {
                 ordersQueryWrapper.eq("order_state", orderState);
             }
-            Page<Orders> ordersPage = new Page<>(pageNum, pageSize, false);
-            return ResultUtil.pageSuccess(ordersService.page(ordersPage, ordersQueryWrapper));
+            Page<Orders> ordersPage = new Page<>(pageNum, pageSize, true);
+            Page<Orders> page = ordersService.page(ordersPage, ordersQueryWrapper);
+            return ResultUtil.pageSuccess(page);
         } catch (Exception e) {
             log.error(e.toString());
             return ResultUtil.defineFail(500, "服务器内部错误");

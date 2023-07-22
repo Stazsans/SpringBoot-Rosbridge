@@ -1,6 +1,7 @@
 package com.ros.controller;
 
 import com.ros.sseEmitter.SseEmitterServer;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
  */
 @RestController
 @RequestMapping("/sse")
+@Tag(name = "sse模块")
 public class SseEmitterController {
     /**
      * 用于创建连接
