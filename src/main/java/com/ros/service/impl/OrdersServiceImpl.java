@@ -41,6 +41,8 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     @Autowired
     private OrderDrugMapper orderDrugMapper;
 
+    private Integer boxId = 1;
+
     @Override
     public void orderAdd(OrderDTO orderDTO) {
         Orders orders = new Orders();
@@ -52,7 +54,11 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         orders.setPatientId(orderDTO.getPatientId());
         orders.setOrderAddress(patientMapper.selectById(orderDTO.getPatientId()).getPatientAddress());
         //TODO 调度药箱
-        orders.setBoxId(1);
+        orders.setBoxId(boxId);
+        boxId = boxId + 1;
+        if (boxId == 5) {
+            boxId = 1;
+        }
         ordersMapper.insert(orders);
         Long orderId = orders.getId();
         log.info(orderId.toString());
